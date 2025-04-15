@@ -26,11 +26,5 @@ jobs:
     - name: Gerar GIF
       run: make gif
 
-    - name: Upload do GIF como artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: gif-gerado
-        path: saida.gif
-
     - name: Limpar arquivos
       run: make clean

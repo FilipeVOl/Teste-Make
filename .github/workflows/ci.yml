@@ -1,10 +1,10 @@
-name: CI com Make
+name: Build e GIF com Make
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build-and-test:
@@ -14,14 +14,17 @@ jobs:
     - name: Clonar o repositório
       uses: actions/checkout@v3
 
-    - name: Instalar dependências
-      run: sudo apt update && sudo apt install build-essential -y
+    - name: Instalar dependências (build tools + ffmpeg)
+      run: sudo apt update && sudo apt install build-essential ffmpeg -y
 
-    - name: Compilar com Make
+    - name: Compilar projeto
       run: make
 
     - name: Rodar testes
       run: make test
 
-    - name: Limpar arquivos gerados
+    - name: Gerar GIF
+      run: make gif
+
+    - name: Limpar arquivos
       run: make clean

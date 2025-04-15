@@ -1,6 +1,21 @@
-# Nome do arquivo de entrada e saída
+CC = gcc
+CFLAGS = -Wall -O2
+OBJS = main.o test.o
+TARGET = test
 VIDEO = video.mp4
 GIF = saida.gif
+
+# Nome do executável
+all: $(TARGET)
+
+$(TARGET): main.o test.o
+	$(CC) $(CFLAGS) -o $(TARGET) main.o test.o
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+test: $(TARGET)
+	./$(TARGET)
 
 # Alvo principal
 gif: $(GIF)
@@ -13,4 +28,4 @@ $(GIF): $(VIDEO)
 
 # Limpeza
 clean:
-	rm -f $(GIF)
+	rm -f *.o $(TARGET) $(GIF)
